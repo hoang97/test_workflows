@@ -8,7 +8,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Build and run mysql database
-              run: docker run --name example -e MYSQL_ROOT_PASSWORD=example -d mysql:8.0
+              run: docker run --name example -e MYSQL_ROOT_PASSWORD=example -p 3306:3306 -d mysql:8.0
 
             - name: Checkout code
               uses: actions/checkout@v3
