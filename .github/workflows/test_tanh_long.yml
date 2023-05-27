@@ -1,0 +1,21 @@
+name: test_api
+on:
+    push:
+        branches: ["*"]
+
+jobs:
+    run_api_test:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Build and run mysql database
+              run: docker run --name example -e MYSQL_ROOT_PASSWORD=example -d mysql:8.0
+
+            - name: Checkout code
+              uses: actions/checkout@v3
+        
+            - name: Install dependencies
+              run: pip install -r ${{ github.workspace }}/requirements.txt
+
+            - name: Run test
+              run: python test.py
+            
