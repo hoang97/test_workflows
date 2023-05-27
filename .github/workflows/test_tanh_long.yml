@@ -16,7 +16,7 @@ jobs:
             - name: Make sure database is ready
               uses: jakejarvis/wait-action@master
               with:
-                time: '30s'
+                time: '5s'
         
             - name: Install dependencies
               run: pip install -r ${{ github.workspace }}/requirements.txt
