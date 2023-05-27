@@ -7,11 +7,16 @@ jobs:
     run_api_test:
         runs-on: ubuntu-latest
         steps:
-            - name: Build and run mysql database
-              run: docker run --name example -e MYSQL_ROOT_PASSWORD=example -p 3306:3306 -d mysql:8.0 --default-authentication-plugin=mysql_native_password
-
             - name: Checkout code
               uses: actions/checkout@v3
+              
+            - name: Build and run mysql database
+              run: docker run --name example -e MYSQL_ROOT_PASSWORD=example -p 3306:3306 -d mysql:8.0 --default-authentication-plugin=mysql_native_password
+            
+            - name: Make sure database is ready
+              uses: jakejarvis/wait-action@master
+              with:
+                time: '30s'
         
             - name: Install dependencies
               run: pip install -r ${{ github.workspace }}/requirements.txt
